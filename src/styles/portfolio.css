@@ -100,7 +100,7 @@ nav.scrolled {
 .hero {
   min-height: 100vh;
   display: flex; align-items: center; justify-content: center;
-  padding: 120px 60px 80px;
+  padding: 100px 60px 50px;
   position: relative; overflow: hidden;
 }
 .hero-inner {
@@ -201,7 +201,7 @@ nav.scrolled {
 }
 
 /* ── Section shared ── */
-.section { padding: 100px 60px; max-width: 1200px; margin: 0 auto; }
+.section { padding: 60px 60px; max-width: 1200px; margin: 0 auto; }
 .section-label {
   font-family: var(--font-body);
   font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
@@ -215,7 +215,7 @@ nav.scrolled {
 .section-sub {
   font-family: var(--font-body);
   color: var(--muted); font-size: 0.95rem; max-width: 560px;
-  line-height: 1.7; margin-bottom: 60px;
+  line-height: 1.7; margin-bottom: 36px;
 }
 
 /* ── About ── */
@@ -307,7 +307,7 @@ nav.scrolled {
 .contact-section {
   border-top: 1px solid var(--border);
   background: rgba(10,22,40,0.6);
-  padding: 80px 60px 40px;
+  padding: 60px 60px 32px;
 }
 .contact-inner { max-width: 1100px; margin: 0 auto; }
 .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 60px; }
@@ -372,7 +372,7 @@ nav.scrolled {
     letter-spacing: 1px;
   }
 
-  .hero { padding: 90px 20px 60px; }
+  .hero { padding: 80px 20px 40px; }
   .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
   .hero-name { font-size: clamp(2.4rem, 10vw, 3.5rem); }
   .hero-role { max-width: 100%; }
@@ -380,7 +380,7 @@ nav.scrolled {
   .hero-avatar-wrap { display: flex; justify-content: center; }
   .avatar-ring { width: 170px; height: 170px; }
 
-  .section { padding: 60px 20px; }
+  .section { padding: 40px 20px; }
   .section-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
 
   .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -393,7 +393,7 @@ nav.scrolled {
 
   .projects-grid { grid-template-columns: 1fr; }
 
-  .contact-section { padding: 60px 20px 30px; }
+  .contact-section { padding: 40px 20px 24px; }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .contact-heading { font-size: clamp(1.6rem, 7vw, 2.2rem); }
   .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
