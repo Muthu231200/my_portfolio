@@ -12,7 +12,7 @@ export default function Experience() {
             <div className="exp-company">Yeejai Technologies</div>
             <div className="exp-role">Software Developer</div>
           </div>
-          <div className="exp-badge">2024 – Present · 2 Years</div>
+          <div className="exp-badge">2024 – 2026 · 2 Years</div>
         </div>
         <ul className="exp-list">
           <li>Developed programs to automate processes and improve user experience across multiple client platforms.</li>
