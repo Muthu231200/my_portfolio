@@ -1,23 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function Navbar() {
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
-  return (
-    <nav className="navbar">
-      <div className="nav-left">Muthukamatchi | Full Stack Developer</div>
+  useEffect(() => {
+    const fn = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", fn);
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
 
+  return (
+    <nav className={scrolled ? "scrolled" : ""}>
+      <div className="nav-logo">MK.</div>
       <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu">
         <span className={`hamburger ${open ? "open" : ""}`} />
       </button>
-
-      <div className={`nav-right ${open ? "nav-open" : ""}`}>
-        <a href="#about" onClick={() => setOpen(false)}>About</a>
-        <a href="#projects" onClick={() => setOpen(false)}>Projects</a>
-        <a href="#contact" onClick={() => setOpen(false)}>Contact</a>
-      </div>
+      <ul className={`nav-links ${open ? "nav-open" : ""}`}>
+        {["Home", "About", "Experience", "Projects", "Contact"].map((l) => (
+          <li key={l}>
+            <a href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}>{l}</a>
+          </li>
+        ))}
+      </ul>
     </nav>
   );
 }
-
-export default Navbar;
