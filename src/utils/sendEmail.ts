@@ -11,6 +11,9 @@ const SERVICE_ID = "YOUR_SERVICE_ID";
 const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
 const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
+// Until real keys are set, the contact form falls back to opening the visitor's mail app.
+export const emailConfigured = !PUBLIC_KEY.startsWith("YOUR_");
+
 export async function sendEmail(data: {
   name: string;
   email: string;
