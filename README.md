@@ -32,6 +32,7 @@ Deploy the `dist/` folder to any static host (Netlify, Vercel, GitHub Pages, cPa
 | Styles | `src/styles.css` |
 
 Project **Live** / **Code** buttons appear automatically once you set `liveUrl` / `codeUrl` in `profile.ts`.
+Projects with `featured: true` get a large card with phone mockups (one per `screens` label) and a `highlights` checklist; the rest appear under "More projects", filtered by `category` (`mobile`, `web`, `backend`).
 The contact form opens the visitor's mail app until you add EmailJS keys; after that it sends directly.
 
 ## Skills showcase

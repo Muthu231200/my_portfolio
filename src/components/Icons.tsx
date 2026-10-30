@@ -39,6 +39,21 @@ export const ArrowIcon = ({ size }: P) => (
 export const ExternalIcon = ({ size }: P) => (
   <svg {...base(size)}><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" /></svg>
 );
+export const MobileIcon = ({ size }: P) => (
+  <svg {...base(size)}><rect x="6" y="2" width="12" height="20" rx="2.5" /><path d="M11 18h2" /></svg>
+);
+export const WebIcon = ({ size }: P) => (
+  <svg {...base(size)}><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M2 9h20M6 6.5h.01M9 6.5h.01" /></svg>
+);
+export const ServerIcon = ({ size }: P) => (
+  <svg {...base(size)}><rect x="3" y="3" width="18" height="7" rx="2" /><rect x="3" y="14" width="18" height="7" rx="2" /><path d="M7 6.5h.01M7 17.5h.01" /></svg>
+);
+export const CapIcon = ({ size }: P) => (
+  <svg {...base(size)}><path d="m2 9 10-5 10 5-10 5Z" /><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6" /></svg>
+);
+export const CheckIcon = ({ size }: P) => (
+  <svg {...base(size)}><path d="m5 12 5 5 9-10" /></svg>
+);
 export const DownloadIcon = ({ size }: P) => (
   <svg {...base(size)}><path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg>
 );

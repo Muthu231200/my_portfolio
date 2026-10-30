@@ -11,7 +11,7 @@ export const PROFILE = {
   email: "muthukamatchi170167@gmail.com",
   phone: "+91 75399 98917",
   phoneHref: "tel:+917539998917",
-  github: "https://github.com/muthukamatchi", // TODO: confirm GitHub username
+  github: "https://github.com/Muthu231200",
   linkedin: "https://www.linkedin.com/in/muthu-kamatchi-3347701b3",
   resumeUrl: "/resume/Muthu_Kamatchi_Resume.pdf",
   intro:
@@ -48,6 +48,10 @@ export const SKILLS: { group: string; items: string[] }[] = [
 export type Project = {
   title: string;
   kind: string;
+  category: "mobile" | "web" | "backend";
+  featured?: boolean; // shown as a large card with app mockups
+  highlights?: string[]; // featured only
+  screens?: string[]; // featured only: one phone mockup per label
   desc: string;
   stack: string[];
   liveUrl?: string; // buttons only render when a URL is set
@@ -57,6 +61,10 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     title: "Mahinzo",
+    category: "mobile",
+    featured: true,
+    highlights: ["Customer, delivery partner and vendor apps", "React web application", "Shared Node.js backend APIs"],
+    screens: ["Vendor", "Customer", "Delivery"],
     kind: "E-commerce platform",
     desc: "Multi-app commerce platform — customer, delivery partner and vendor apps in Flutter plus a React web app, all on shared Node.js APIs.",
     stack: ["Flutter", "React", "Node.js", "REST APIs"],
@@ -65,6 +73,10 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "Kasupai",
+    category: "mobile",
+    featured: true,
+    highlights: ["Photo capture of wastage products", "Real-time updates with Socket.IO", "REST API integration"],
+    screens: ["Kasupai"],
     kind: "Wastage management app",
     desc: "“Turn your waste into cash” — Flutter app for managing wastage products, with photo capture, real-time Socket.IO updates and REST integration.",
     stack: ["Flutter", "Provider", "Dio", "Socket.IO"],
@@ -73,36 +85,42 @@ export const PROJECTS: Project[] = [
   },
   {
     title: "Aruvi Restaurant Platform",
+    category: "web",
     kind: "Restaurant website",
     desc: "Restaurant website with digital menu, online ordering, table bookings and QR-code menu access.",
     stack: ["WordPress", "WooCommerce", "PHP"],
   },
   {
     title: "QR-WhatsApp Bulk Messaging",
+    category: "backend",
     kind: "Automation",
     desc: "Bulk messaging system with QR-based session login, message queueing, templates and scheduling.",
     stack: ["Node.js", "whatsapp-web.js"],
   },
   {
     title: "Logistics Application",
+    category: "backend",
     kind: "Backend services",
     desc: "Import/export backend — shipment tracking, inventory and customs documentation via CQRS handlers.",
     stack: [".NET", "CQRS", "MongoDB", "FluentValidation"],
   },
   {
     title: "Call Analytics Reports",
+    category: "backend",
     kind: "Reporting",
     desc: "Stored-procedure reporting on call outcomes and durations, scheduled through SSRS.",
     stack: ["SQL", "Stored procedures", "SSRS"],
   },
   {
     title: "DAL Adulteration Detection",
+    category: "mobile",
     kind: "Android app",
     desc: "Android front end for capturing food samples and showing adulteration analysis results.",
     stack: ["Kotlin", "Android SDK"],
   },
   {
     title: "Plant Disease Detection",
+    category: "mobile",
     kind: "Android app",
     desc: "Android front end that sends leaf images to an ML API and shows disease predictions.",
     stack: ["Kotlin", "Android SDK"],

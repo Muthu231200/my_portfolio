@@ -1,34 +1,55 @@
 import { useState, type FormEvent } from "react";
+import aboutImg from "../assets/about.jpg";
 import { EDUCATION, EXPERIENCE, PROFILE, PROJECTS, SKILLS } from "../data/profile";
 import { emailConfigured, sendEmail } from "../utils/sendEmail";
+import ProjectList from "./Projects";
 import SkillShowcase from "./SkillShowcase";
-import { ArrowIcon, DownloadIcon, ExternalIcon, GitHubIcon, LinkedInIcon, MailIcon, PhoneIcon, PinIcon } from "./Icons";
+import { ArrowIcon, CapIcon, CheckIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon, PhoneIcon, PinIcon } from "./Icons";
 
-function SectionHead({ index, title, sub }: { index: string; title: string; sub?: string }) {
+function SectionHead({ title, sub }: { title: string; sub?: string }) {
   return (
     <div className="section-head reveal">
-      <span className="section-head__index">{index}</span>
       <h2>{title}</h2>
       {sub && <p>{sub}</p>}
     </div>
   );
 }
 
+// Only facts from the resume: years from the About text, project count from PROJECTS, Mahinzo's three apps.
+const STATS = [
+  { value: "2+", label: "Years experience" },
+  { value: String(PROJECTS.length), label: "Projects built" },
+  { value: "3", label: "Mahinzo apps" },
+];
+
 export function About() {
   return (
     <section id="about" className="section">
       <div className="container">
-        <SectionHead index="01" title="About" />
+        <SectionHead title="About" />
         <div className="about">
-          <div className="about__copy reveal">
-            {PROFILE.about.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}
+          <figure className="about__photo reveal">
+            <img src={aboutImg} alt={`${PROFILE.name} at work`} width={720} height={900} loading="lazy" />
+            <figcaption>
+              <span className="dot" aria-hidden /> Currently at {EXPERIENCE[0].company}
+            </figcaption>
+          </figure>
+
+          <div className="about__main">
+            <div className="about__copy reveal">
+              {PROFILE.about.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}
+            </div>
+            <dl className="stats reveal">
+              {STATS.map((s) => (
+                <div key={s.label}><dt>{s.label}</dt><dd>{s.value}</dd></div>
+              ))}
+            </dl>
+            <ul className="about__facts reveal">
+              <li><PinIcon size={16} /> {PROFILE.location}</li>
+              <li><CheckIcon size={16} /> {PROFILE.role}</li>
+              <li><CheckIcon size={16} /> Flutter · React · Node.js</li>
+            </ul>
           </div>
-          <dl className="about__facts reveal">
-            <div><dt>Role</dt><dd>{PROFILE.role}</dd></div>
-            <div><dt>Currently</dt><dd>{EXPERIENCE[0].company}</dd></div>
-            <div><dt>Based in</dt><dd>{PROFILE.location}</dd></div>
-            <div><dt>Focus</dt><dd>Flutter apps, React, Node.js APIs</dd></div>
-          </dl>
         </div>
       </div>
     </section>
@@ -39,7 +60,7 @@ export function Skills() {
   return (
     <section id="skills" className="section section--tint">
       <div className="container">
-        <SectionHead index="02" title="Skills" sub="Tools I use to ship mobile apps, web apps and the APIs behind them." />
+        <SectionHead title="Skills" sub="Tools I use to ship mobile apps, web apps and the APIs behind them." />
         <SkillShowcase />
         <h3 className="subhead reveal">Full toolkit</h3>
         <div className="skills">
@@ -61,37 +82,9 @@ export function Projects() {
   return (
     <section id="projects" className="section">
       <div className="container">
-        <SectionHead index="03" title="Projects" sub="Products and systems I've built." />
+        <SectionHead title="Projects" sub="Apps, platforms and systems I've built — from mobile apps to backend services." />
 
-        <div className="projects">
-          {PROJECTS.map((p, i) => (
-            <article className="project reveal" key={p.title}>
-              <div className="project__top">
-                <span className="project__num">{String(i + 1).padStart(2, "0")}</span>
-                <span className="project__kind">{p.kind}</span>
-              </div>
-              <h3>{p.title}</h3>
-              <p className="project__desc">{p.desc}</p>
-              <ul className="tags">
-                {p.stack.map((t) => <li key={t}>{t}</li>)}
-              </ul>
-              {(p.liveUrl || p.codeUrl) && (
-                <div className="project__links">
-                  {p.liveUrl && (
-                    <a className="btn btn--small" href={p.liveUrl} target="_blank" rel="noreferrer">
-                      Live <ExternalIcon size={14} />
-                    </a>
-                  )}
-                  {p.codeUrl && (
-                    <a className="btn btn--small btn--ghost" href={p.codeUrl} target="_blank" rel="noreferrer">
-                      <GitHubIcon size={14} /> Code
-                    </a>
-                  )}
-                </div>
-              )}
-            </article>
-          ))}
-        </div>
+        <ProjectList />
       </div>
     </section>
   );
@@ -101,18 +94,20 @@ export function Experience() {
   return (
     <section id="experience" className="section section--tint">
       <div className="container">
-        <SectionHead index="04" title="Experience" />
+        <SectionHead title="Experience" />
         <ol className="timeline">
-          {EXPERIENCE.map((e) => (
+          {EXPERIENCE.map((e, i) => (
             <li className="timeline__item reveal" key={e.company}>
-              <div className="timeline__meta">
-                <span className="timeline__period">{e.period}</span>
-              </div>
-              <div className="timeline__body">
+              <span className={`timeline__dot${i === 0 ? " is-current" : ""}`} aria-hidden />
+              <div className="timeline__card">
+                <div className="timeline__top">
+                  <span className="timeline__period">{e.period}</span>
+                  {i === 0 && <span className="timeline__now">Current</span>}
+                </div>
                 <h3>{e.role}</h3>
                 <p className="timeline__company">{e.company}{e.place && `, ${e.place}`}</p>
                 <ul>
-                  {e.points.map((p) => <li key={p}>{p}</li>)}
+                  {e.points.map((p) => <li key={p}><CheckIcon size={15} /> {p}</li>)}
                 </ul>
               </div>
             </li>
@@ -122,10 +117,11 @@ export function Experience() {
         <h3 className="subhead reveal">Education &amp; courses</h3>
         <ul className="edu">
           {EDUCATION.map((e) => (
-            <li className="reveal" key={e.title}>
-              <strong>{e.title}</strong>
-              <span>{e.place}</span>
+            <li className="edu__card reveal" key={e.title}>
+              <span className="edu__icon"><CapIcon size={20} /></span>
               <span className="edu__period">{e.period}</span>
+              <strong>{e.title}</strong>
+              <span className="edu__place">{e.place}</span>
             </li>
           ))}
         </ul>
@@ -143,6 +139,14 @@ export function Experience() {
     </section>
   );
 }
+
+const CONTACTS = [
+  { Icon: MailIcon, label: "Email", value: PROFILE.email, href: `mailto:${PROFILE.email}` },
+  { Icon: PhoneIcon, label: "Phone", value: PROFILE.phone, href: PROFILE.phoneHref },
+  { Icon: LinkedInIcon, label: "LinkedIn", value: "Connect with me", href: PROFILE.linkedin, external: true },
+  { Icon: GitHubIcon, label: "GitHub", value: "See my code", href: PROFILE.github, external: true },
+  { Icon: PinIcon, label: "Location", value: PROFILE.location },
+];
 
 export function Contact() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -167,15 +171,35 @@ export function Contact() {
   return (
     <section id="contact" className="section">
       <div className="container">
-        <SectionHead index="05" title="Contact" sub="Have a project or role in mind? I'd like to hear about it." />
+        <SectionHead title="Let's work together"sub="Have a project or role in mind? I'd like to hear about it." />
         <div className="contact">
-          <ul className="contact__list reveal">
-            <li><MailIcon /><a href={`mailto:${PROFILE.email}`}>{PROFILE.email}</a></li>
-            <li><PhoneIcon /><a href={PROFILE.phoneHref}>{PROFILE.phone}</a></li>
-            <li><PinIcon /><span>{PROFILE.location}</span></li>
-            <li><GitHubIcon /><a href={PROFILE.github} target="_blank" rel="noreferrer">GitHub</a></li>
-            <li><LinkedInIcon /><a href={PROFILE.linkedin} target="_blank" rel="noreferrer">LinkedIn</a></li>
-          </ul>
+          <div className="contact__side reveal">
+            <p className="contact__pitch">
+              Open to full-time roles and freelance work in <span className="accent">mobile, web and backend</span> development.
+            </p>
+            <ul className="contact__list">
+              {CONTACTS.map(({ Icon, label, value, href, external }) => {
+                const inner = (
+                  <>
+                    <span className="contact__icon"><Icon size={20} /></span>
+                    <span className="contact__text"><small>{label}</small>{value}</span>
+                  </>
+                );
+                return (
+                  <li key={label}>
+                    {href ? (
+                      <a className="contact__card" href={href} {...(external && { target: "_blank", rel: "noreferrer" })}>
+                        {inner}
+                        <span className="contact__go"><ArrowIcon size={16} /></span>
+                      </a>
+                    ) : (
+                      <div className="contact__card">{inner}</div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
 
           <form className="contact__form reveal" onSubmit={onSubmit}>
             <label>
