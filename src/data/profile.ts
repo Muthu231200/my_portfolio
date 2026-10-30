@@ -49,9 +49,6 @@ export type Project = {
   title: string;
   kind: string;
   category: "mobile" | "web" | "backend";
-  featured?: boolean; // shown as a large card with app mockups
-  highlights?: string[]; // featured only
-  screens?: string[]; // featured only: one phone mockup per label
   desc: string;
   stack: string[];
   liveUrl?: string; // buttons only render when a URL is set
@@ -62,9 +59,6 @@ export const PROJECTS: Project[] = [
   {
     title: "Mahinzo",
     category: "mobile",
-    featured: true,
-    highlights: ["Customer, delivery partner and vendor apps", "React web application", "Shared Node.js backend APIs"],
-    screens: ["Vendor", "Customer", "Delivery"],
     kind: "E-commerce platform",
     desc: "Multi-app commerce platform — customer, delivery partner and vendor apps in Flutter plus a React web app, all on shared Node.js APIs.",
     stack: ["Flutter", "React", "Node.js", "REST APIs"],
@@ -74,9 +68,6 @@ export const PROJECTS: Project[] = [
   {
     title: "Kasupai",
     category: "mobile",
-    featured: true,
-    highlights: ["Photo capture of wastage products", "Real-time updates with Socket.IO", "REST API integration"],
-    screens: ["Kasupai"],
     kind: "Wastage management app",
     desc: "“Turn your waste into cash” — Flutter app for managing wastage products, with photo capture, real-time Socket.IO updates and REST integration.",
     stack: ["Flutter", "Provider", "Dio", "Socket.IO"],

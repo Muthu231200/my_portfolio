@@ -4,7 +4,9 @@ import { EDUCATION, EXPERIENCE, PROFILE, PROJECTS, SKILLS } from "../data/profil
 import { emailConfigured, sendEmail } from "../utils/sendEmail";
 import ProjectList from "./Projects";
 import SkillShowcase from "./SkillShowcase";
-import { ArrowIcon, CapIcon, CheckIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon, PhoneIcon, PinIcon } from "./Icons";
+import {
+  ArrowIcon, CapIcon, CheckIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon, MobileIcon, PhoneIcon, PinIcon, ServerIcon, WebIcon,
+} from "./Icons";
 
 function SectionHead({ title, sub }: { title: string; sub?: string }) {
   return (
@@ -22,33 +24,52 @@ const STATS = [
   { value: "3", label: "Mahinzo apps" },
 ];
 
+// What I do, with tools taken from SKILLS.
+const FOCUS = [
+  { Icon: MobileIcon, title: "Mobile apps", tools: "Flutter · Kotlin · Android SDK" },
+  { Icon: WebIcon, title: "Web apps", tools: "React · JavaScript · WordPress" },
+  { Icon: ServerIcon, title: "Backend & APIs", tools: "Node.js · Express · .NET · MySQL" },
+];
+
 export function About() {
   return (
     <section id="about" className="section">
       <div className="container">
         <SectionHead title="About" />
-        <div className="about">
-          <figure className="about__photo reveal">
+        <div className="bento">
+          <figure className="tile tile--photo reveal">
             <img src={aboutImg} alt={`${PROFILE.name} at work`} width={720} height={900} loading="lazy" />
             <figcaption>
-              <span className="dot" aria-hidden /> Currently at {EXPERIENCE[0].company}
+              <strong>{PROFILE.name}</strong>
+              <span><PinIcon size={14} /> {PROFILE.location}</span>
             </figcaption>
           </figure>
 
-          <div className="about__main">
-            <div className="about__copy reveal">
-              {PROFILE.about.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}
+          <div className="tile tile--intro reveal">
+            <span className="tile__eyebrow">Who I am</span>
+            <h3>Building <span className="accent">mobile apps, web apps</span> and the APIs behind them.</h3>
+            {PROFILE.about.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}
+          </div>
+
+          {STATS.map((s) => (
+            <div className="tile tile--stat reveal" key={s.label}>
+              <strong>{s.value}</strong>
+              <span>{s.label}</span>
             </div>
-            <dl className="stats reveal">
-              {STATS.map((s) => (
-                <div key={s.label}><dt>{s.label}</dt><dd>{s.value}</dd></div>
-              ))}
-            </dl>
-            <ul className="about__facts reveal">
-              <li><PinIcon size={16} /> {PROFILE.location}</li>
-              <li><CheckIcon size={16} /> {PROFILE.role}</li>
-              <li><CheckIcon size={16} /> Flutter · React · Node.js</li>
-            </ul>
+          ))}
+
+          {FOCUS.map(({ Icon, title, tools }) => (
+            <div className="tile tile--focus reveal" key={title}>
+              <span className="tile__icon"><Icon size={22} /></span>
+              <h4>{title}</h4>
+              <p>{tools}</p>
+            </div>
+          ))}
+
+          <div className="tile tile--now reveal">
+            <span className="tile__eyebrow"><span className="dot" aria-hidden /> Currently</span>
+            <h4>{EXPERIENCE[0].role}</h4>
+            <p>{EXPERIENCE[0].company} · building the Mahinzo platform</p>
           </div>
         </div>
       </div>
